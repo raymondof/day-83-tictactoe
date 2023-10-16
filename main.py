@@ -25,7 +25,7 @@ def check_winner(board, mark):
         print(key, value)
         current += 1
 
-        # Horizontal cunter
+        # Horizontal counter
         # Reset horizontal counter at the beginning of each horizontal line
         if key == 4 or key == 7:
             hor_count = 0
@@ -35,7 +35,17 @@ def check_winner(board, mark):
             if hor_count == 3:
                 return 1
 
-        # Vertical counter
+        # Vertical checker
+        if value == mark and key > 0 and key < 4:
+            vertical_start = key
+            next_value = vertical_start + 3
+            if board[next_value] == mark:
+                next_value = vertical_start + 6
+                if board[next_value] == mark:
+                    return 1
+
+        #
+
 
 
 
