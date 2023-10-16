@@ -16,13 +16,13 @@ game = {1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: ""}
 print(field)
 
 def check_winner(board, mark):
-    current = 1
     hor_count = 0
+    mark_counter = 0
     print(f"Players mark: {mark}")
 
     for key, value in board.items():
-        current += 1
-
+        if value != "":
+            mark_counter += 1
         # Horizontal counter
         # Reset horizontal counter at the beginning of each horizontal line
         if key == 4 or key == 7:
@@ -54,6 +54,10 @@ def check_winner(board, mark):
                 if board[7] == mark:
                     return 1
 
+        # Draw checker
+        if mark_counter == 9:
+            return 0
+
 
 
 
@@ -79,6 +83,9 @@ while game_on:
 
             if result == 1:
                 print(f"Player {player} has won the game")
+                break
+            elif result == 0:
+                print("No winner this time!")
                 break
 
             # Change player
