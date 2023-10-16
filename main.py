@@ -21,6 +21,7 @@ def check_winner(board, mark):
     print(f"Players mark: {mark}")
 
     for key, value in board.items():
+        # Count how many marks has been placed
         if value != "":
             mark_counter += 1
         # Horizontal counter
@@ -58,9 +59,6 @@ def check_winner(board, mark):
         if mark_counter == 9:
             return 0
 
-
-
-
 game_on = True
 players = {1: "X", 2: "O"}
 player = 1
@@ -75,9 +73,10 @@ while game_on:
 
     if mark > 0 and mark < 10:
         if game[mark] == "":
+            # Replace the number on field and game with players mark
             game[mark] = players[player]
-            #print(game)
             field = field.replace(str(mark), players[player])
+            # Check if either player has 3 straight
             result = check_winner(game, players[player])
             print(field)
 
@@ -95,6 +94,5 @@ while game_on:
                 player = 1
         else:
             print("Choose another spot, this is taken!")
-
     else:
         print("Please enter number from 1 to 9.")
