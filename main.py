@@ -1,7 +1,8 @@
 print("Welcome to play Tic Tac Toe. This is a simple text based game created by Raimo.")
 print("It will allow 2 players to play.\n")
-print("The game field is as follows. Each player will get one turn.")
-print("First player is 'X' and second player 'O'")
+print("Each player will turn after each other.")
+print("First player is 'X' and second player 'O'. The first to gain 3 straight line wins!")
+print("Good luck!")
 
 field = """
 7 | 8 | 9
@@ -13,8 +14,6 @@ field = """
 
 game = {1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: ""}
 print(field)
-#game["2"] = "x"
-print(game)
 
 def check_winner(board, mark):
     current = 1
@@ -22,7 +21,6 @@ def check_winner(board, mark):
     print(f"Players mark: {mark}")
 
     for key, value in board.items():
-        print(key, value)
         current += 1
 
         # Horizontal counter
@@ -44,7 +42,17 @@ def check_winner(board, mark):
                 if board[next_value] == mark:
                     return 1
 
-        #
+        # Diagonal checker
+        #if value == mark and key == 1 or value == mark and key == 3:
+            diagonal_start = key
+        if value == mark and key == 1:
+            if board[5] == mark:
+                if board[9] == mark:
+                    return 1
+        elif value == mark and key == 3:
+            if board[5] == mark:
+                if board[7] == mark:
+                    return 1
 
 
 
@@ -64,14 +72,13 @@ while game_on:
     if mark > 0 and mark < 10:
         if game[mark] == "":
             game[mark] = players[player]
-            print(game)
+            #print(game)
             field = field.replace(str(mark), players[player])
-            print(field)
             result = check_winner(game, players[player])
+            print(field)
 
             if result == 1:
                 print(f"Player {player} has won the game")
-                print("Game over!")
                 break
 
             # Change player
@@ -79,6 +86,8 @@ while game_on:
                 player = 2
             else:
                 player = 1
+        else:
+            print("Choose another spot, this is taken!")
 
     else:
         print("Please enter number from 1 to 9.")
